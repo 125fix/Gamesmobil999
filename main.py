@@ -50,13 +50,13 @@ async def main(page: ft.Page):
 
     coin = ft.Container(
         content=ft.Text("TAP", size=54, weight="w900", color="#FFFFFF"),
-        alignment=ft.alignment.center,
+        alignment=ft.Alignment(0, 0),
         width=220,
         height=220,
         border_radius=110,
         gradient=ft.LinearGradient(
-            begin=ft.alignment.top_left,
-            end=ft.alignment.bottom_right,
+            begin=ft.Alignment(-1, -1),
+            end=ft.Alignment(1, 1),
             colors=["#FF0076", "#FF5900"]
         ),
         on_click=on_click,
