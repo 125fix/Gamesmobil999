@@ -14,11 +14,8 @@ async def main(page: ft.Page):
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
     import uuid
-    # Уникальный ID пользователя (сессия)
-    user_id = page.session.get("user_id")
-    if not user_id:
-        user_id = str(uuid.uuid4())
-        page.session.set("user_id", user_id)
+    # Уникальный ID текущего подключения
+    user_id = str(uuid.uuid4())
     if user_id not in global_scores:
         global_scores[user_id] = 0
 
