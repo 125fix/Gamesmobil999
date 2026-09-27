@@ -82,7 +82,7 @@ async def main(page: ft.Page):
             controls=[
                 ft.Row([
                     ft.Text(f"Привет, {user_data['name']}!", size=20, weight="bold", color="#FFFFFF"),
-                    ft.IconButton(icon="settings", on_click=lambda _: page.go("/admin"), tooltip="Админка")
+                    ft.IconButton(icon="settings", on_click=lambda _: navigate("/admin"), tooltip="Админка")
                 ], alignment="spaceBetween"),
                 ft.Column(
                     [
@@ -134,7 +134,7 @@ async def main(page: ft.Page):
             "/admin",
             controls=[
                 ft.Row([
-                    ft.IconButton(icon="arrow_back", on_click=lambda _: page.go("/"), icon_color="#FFFFFF"),
+                    ft.IconButton(icon="arrow_back", on_click=lambda _: navigate("/"), icon_color="#FFFFFF"),
                     ft.Text("Панель Администратора", size=22, weight="bold", color="#FFFFFF"),
                     ft.IconButton(icon="refresh", on_click=refresh_data, icon_color="#FF0076", tooltip="Обновить список")
                 ], alignment="spaceBetween"),
@@ -149,6 +149,10 @@ async def main(page: ft.Page):
     # ===============================
     # СИСТЕМА НАВИГАЦИИ (РОУТИНГ)
     # ===============================
+    def navigate(route):
+        page.route = route
+        route_change(route)
+        
     def route_change(route):
         page.views.clear()
         if page.route == "/admin":
@@ -158,7 +162,7 @@ async def main(page: ft.Page):
         page.update()
 
     page.on_route_change = route_change
-    page.go(page.route) # Открываем нужный экран при старте
+    navigate(page.route) # Открываем нужный экран при старте
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
