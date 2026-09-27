@@ -1,6 +1,7 @@
 import flet as ft
 import asyncio
 import os
+import uuid
 
 # База данных счета (хранится в оперативной памяти сервера)
 global_scores = {}
@@ -8,12 +9,11 @@ global_scores = {}
 async def main(page: ft.Page):
     # Настройки страницы
     page.title = "Cloud Clicker"
-    page.theme_mode = ft.ThemeMode.DARK
+    page.theme_mode = "dark"
     page.bgcolor = "#1E1E2E"
-    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.horizontal_alignment = "center"
+    page.vertical_alignment = "center"
 
-    import uuid
     # Уникальный ID текущего подключения
     user_id = str(uuid.uuid4())
     if user_id not in global_scores:
@@ -22,15 +22,15 @@ async def main(page: ft.Page):
     score_text = ft.Text(
         value=str(global_scores[user_id]),
         size=80,
-        weight=ft.FontWeight.BOLD,
-        color=ft.colors.WHITE
+        weight="bold",
+        color="#FFFFFF"
     )
 
     title_text = ft.Text(
         value="СКОР",
         size=20,
         color="#A6ACCD",
-        weight=ft.FontWeight.W_500
+        weight="w500"
     )
 
     # Анимация монеты
@@ -49,7 +49,7 @@ async def main(page: ft.Page):
         page.update()
 
     coin = ft.Container(
-        content=ft.Text("TAP", size=54, weight=ft.FontWeight.W_900, color=ft.colors.WHITE),
+        content=ft.Text("TAP", size=54, weight="w900", color="#FFFFFF"),
         alignment=ft.alignment.center,
         width=220,
         height=220,
@@ -60,8 +60,8 @@ async def main(page: ft.Page):
             colors=["#FF0076", "#FF5900"]
         ),
         on_click=on_click,
-        scale=ft.transform.Scale(1.0),
-        animate_scale=ft.animation.Animation(150, ft.AnimationCurve.EASE_OUT_BACK)
+        scale=1.0,
+        animate_scale=150
     )
 
     page.add(
@@ -72,7 +72,7 @@ async def main(page: ft.Page):
                 ft.Container(height=50),
                 coin
             ],
-            horizontal_alignment=ft.CrossAxisAlignment.CENTER
+            horizontal_alignment="center"
         )
     )
 
